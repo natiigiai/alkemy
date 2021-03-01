@@ -33,8 +33,8 @@
                 <x-jet-label for="role" value="{{ __('Rol de usuario') }}" />
                 <select class="block mt-1 w-full" name="role" id="role">
                     <option value="">Seleccione rol de usuario</option>
-                    <option value="1">Developer</option>
-                    <option value="2">Client</option>
+                    <option value="1">Desarrollador</option>
+                    <option value="2">Cliente</option>
                 </select>
             </div>
 

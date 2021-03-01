@@ -59,4 +59,12 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function tieneRol($role){
+        $result = false;
+        if($this->role == $role){
+            $result = true;
+        }
+        return $result;
+    }
 }

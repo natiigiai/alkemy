@@ -19,6 +19,7 @@ class CreateApplicationsTable extends Migration
             $table->double('appPrice');
             $table->string('appImg',100);
             $table->tinyInteger('categoryId')->references('categoryId')->on('categories');
+            $table->tinyInteger('userId')->references('id')->on('users');
             $table->timestamps();
         });
     }
