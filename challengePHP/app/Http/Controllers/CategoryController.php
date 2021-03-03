@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Application;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categorias = Category::paginate(10);
+        return view('categories',['categorias'=>$categorias]);
     }
 
     /**
@@ -44,9 +46,12 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
-        //
+        $categoria = Category::find($id);
+        $aplicaciones = Application::with('relUser','relCategory')->where('categoryId',$id)->paginate(10);
+        return view('showApps', ['categoria'=>$categoria, 'aplicaciones'=>$aplicaciones]
+        );
     }
 
     /**

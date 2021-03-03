@@ -12,8 +12,8 @@ class Application extends Model
 
     public function relUser(){
         return $this->belongsTo('\App\Models\User', //modelo
-            'id', //foreignKey
-            'userId'); //ownerKey
+            'userId', //foreignKey
+            'id'); //ownerKey
         //hasOne relacion a uno... belongsTo pertenece a una tabla
     }
 

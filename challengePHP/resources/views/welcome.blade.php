@@ -23,7 +23,7 @@
     </head>
     <body>
         <header class="bg-dark d-flex justify-content-between p-4">
-            <h1 class="mb-2 text-light">Catálogo de aplicaciones</h1>
+            <h1 class="mb-2 text-light">Aplicaciones</h1>
             @if (Route::has('login'))
                 <div>
                     @auth
@@ -41,13 +41,16 @@
         <main class="container">
 
                 <div class="row m-2">
+                    @foreach($aplicaciones as $aplicacion)
                     <div class="card col-sm-6 col-md-3 col-lg-4 m-1">
-                        <img src="/aplicaciones/noDisponible.jpg" class="img-thumbnail">
+                        <img src="/aplicaciones/{{$aplicacion->appImg}}" class="img-thumbnail">
                         <div class="card-body">
-                            <h2>Nombre</h2>
-                            <a href="/detalle/" class="btn btn-secondary btn-block m-2">Ver detalle</a>
+                            <h2>{{$aplicacion->appName}}</h2>
+                            <a href="/show/{{$aplicacion->appId}}" class="btn btn-secondary btn-block m-2">Ver detalle</a>
                         </div>
                     </div>
+                    @endforeach
+                        {{ $aplicaciones->links() }}
                 </div>
 
         </main>

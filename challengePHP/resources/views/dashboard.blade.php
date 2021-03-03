@@ -22,7 +22,7 @@
                         <div class="list-group">
                             <a href="/apps" class="list-group-item list-group-item-action">Aplicaciones</a>
                             <a href="me/apps/{{Auth::user()->id}}" class="list-group-item list-group-item-action">Mis aplicaciones</a>
-                            <a href="/me/wish" class="list-group-item list-group-item-action">Lista de deseos</a>
+                            <a href="/me/categories" class="list-group-item list-group-item-action">Categorías</a>
                         </div>
                     @endif
                 @endif

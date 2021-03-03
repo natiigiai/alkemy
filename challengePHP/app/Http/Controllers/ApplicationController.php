@@ -6,9 +6,15 @@ use App\Models\Application;
 use App\Models\Category;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class ApplicationController extends Controller
 {
+
+    public function indexApp(){
+        $aplicaciones = Application::paginate(10);
+        return view('welcome', ['aplicaciones'=>$aplicaciones]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -113,8 +119,28 @@ class ApplicationController extends Controller
      */
     public function show($id)
     {
-        $aplicacion = Purchase::with('relCliente','relApp')->find($id);
-        return view('showApp',['aplicacion'=>$aplicacion]);
+        $aplicacion = Application::with('relUser', 'relCategory')->find($id);
+        return view('showApp',
+            [
+                'aplicacion'=>$aplicacion,
+            ]);
+    }
+
+    public function buy( Request $request)
+    {
+        $mensaje = 'Usted ya compro la aplicación '.$request->name.'.';
+        $compra = new Purchase();
+        $compra->appId = $request->appId;
+        $compra->userId = $request->userId;
+        $comprada = Purchase::where('userId', $compra->userId)->where('appId',$compra->appId)->get()->count();
+        if($comprada == 0){
+            $compra->save();
+            $mensaje = 'Ha comprado la aplicación: '.$request->appName.'.';
+
+        }
+        return redirect('/me/apps/'.$compra->userId)
+            ->with('mensaje', $mensaje);
+
     }
 
     /**

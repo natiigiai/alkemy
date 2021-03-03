@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Aplicaciones') }}
+            {{ __('Mis aplicaciones') }}
         </h2>
     </x-slot>
     <div class="py-12">
@@ -57,7 +57,7 @@
                                         <td>{{$app->relApp->appName}}</td>
                                         <td>{{$app->relApp->relCategory->catName}}</td>
                                         <td>
-                                            <a href="/showApp/{{$app->purchaseId}}" class="btn btn-outline-secondary">Detalle</a>
+                                            <a href="/show/{{$app->relApp->appId}}" class="btn btn-outline-secondary">Detalle</a>
                                         </td>
                                     </tr>
                                 @endforeach

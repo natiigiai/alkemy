@@ -7,21 +7,30 @@
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-            <div class="row m-2">
-                <div class="card col-sm-6 col-md-3 col-lg-4 m-1">
+
+                <div class="row atert bg-light border-dark col-8 mx-auto p-2 m-4">
                     <div class="col">
-                        <img src="/aplicaciones/{{$aplicacion->relApp->appImg}}" class="img-thumbnail">
+                        <img src="/aplicaciones/{{$aplicacion->appImg}}" class="img-thumbnail">
                     </div>
-                    <div class="col">
-                        <h2>{{$aplicacion->relApp->appName}}</h2>
-                        Categoría: {{$aplicacion->relApp->relCategory->catName}}<br>
-                        Desarrollada por: {{$aplicacion->relApp->relUser->name}}<br>
-                        Precio: ${{$aplicacion->relApp->appPrice}}<br>
-                        <a href="/me/apps/{{Auth::user()->id}}" class="btn btn-secondary btn-block m-2">Volver al listado de aplicaciones</a>
+                    <div class="col align-self-center">
+                        <strong>{{$aplicacion->appName}}</strong>
+                        Categoría: {{$aplicacion->relCategory->catName}}<br>
+                        Desarrollada por: {{$aplicacion->relUser->name}} <br>
+                        Precio: ${{$aplicacion->appPrice}}<br>
+                        @if(Auth::check())
+                            @if(Auth::user()->tieneRol(2))
+                                        <form action="/buy" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="appId" value="{{$aplicacion->appId}}">
+                                            <input type="hidden" name="appName" value="{{$aplicacion->appName}}">
+                                            <input type="hidden" name="userId" value="{{Auth::user()->id}}">
+                                            <button class="btn btn-dark mb-3">Comprar!</button>
+                                        </form>
+                            @endif
+                        @endif
                     </div>
                 </div>
-            </div>
-
+            <a href="/apps" class="btn btn-secondary m-2">Volver al listado de aplicaciones</a>
         </div>
     </div>
 </div>

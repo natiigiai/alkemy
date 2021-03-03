@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +14,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ApplicationController::class, 'indexApp']);
+Route::get('/apps', [ApplicationController::class, 'indexApp']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
@@ -36,5 +35,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/deleteApp/{id}',[Applicat
 
 Route::middleware(['auth:sanctum', 'verified'])->delete('/deleteApp',[ApplicationController::class, 'destroy']);
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/showApp/{id}',[ApplicationController::class,'show']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/show/{id}',[ApplicationController::class,'show']);
+
+Route::middleware(['auth:sanctum', 'verified'])->post('/buy', [ApplicationController::class, 'buy']);
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/me/categories', [CategoryController::class, 'index']);
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/showApps/{id}', [CategoryController::class, 'show']);
 
